@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\ProductController;
 use Database\Seeders\ProductSeeder;
 use Illuminate\Http\Request;
@@ -13,4 +14,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResources([
     'categories' => CategoryController::class,
     'products' => ProductController::class,
+    'categories.products' => CategoryProductController::class,
 ]);

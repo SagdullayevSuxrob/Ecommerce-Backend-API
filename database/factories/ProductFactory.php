@@ -20,14 +20,14 @@ class ProductFactory extends Factory
             "category_id" => rand(1, 5),
             "name" => [
                 "uz" => fake()->sentence(3),
-                "en" => fake()->sentence(3),
+                "en" => "lorem ipsum",
             ],
 
             "price" => rand(50000, 10000000),
 
             "description" => [
                 "uz" => fake()->paragraph(5),
-                "en" => fake()->paragraph(5),
+                "en" => "lorem ipsum dolor sit amet"
             ]
         ];
     }

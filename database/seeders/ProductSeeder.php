@@ -15,12 +15,12 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $products = Product::factory()->count(50)->create();
+        $products = Product::factory()->count(100)->create();
 
         foreach ($products as $product) {
             $product->stocks()->create([
                 "quantity" => rand(1, 10),
-                "attributes" => [
+                "attributes" => json_encode([
                     [
                         "attribute_id" => 1,
                         "value_id" => rand(1, 3)
@@ -29,7 +29,35 @@ class ProductSeeder extends Seeder
                         "attribute_id" => 2,
                         "value_id" => rand(4, 5)
                     ]
-                ]
+                ])
+            ]);
+
+            $product->stocks()->create([
+                "quantity" => rand(1, 10),
+                "attributes" => json_encode([
+                    [
+                        "attribute_id" => 1,
+                        "value_id" => rand(1, 3)
+                    ],
+                    [
+                        "attribute_id" => 2,
+                        "value_id" => rand(4, 5)
+                    ]
+                ])
+            ]);
+
+            $product->stocks()->create([
+                "quantity" => rand(1, 10),
+                "attributes" => json_encode([
+                    [
+                        "attribute_id" => 1,
+                        "value_id" => rand(1, 3)
+                    ],
+                    [
+                        "attribute_id" => 2,
+                        "value_id" => rand(4, 5)
+                    ]
+                ])
             ]);
         }
     }

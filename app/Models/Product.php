@@ -17,7 +17,7 @@ class Product extends Model
         "description",
     ];
 
-    public array $translatable = ["name"];
+    public array $translatable = ['name', 'description'];
 
     public function category()
     {
