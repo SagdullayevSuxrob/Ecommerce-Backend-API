@@ -23,10 +23,10 @@ class ProductFactory extends Factory
                 "en" => "lorem ipsum",
             ],
 
-            "price" => rand(50000, 10000000),
+            "price" => rand(50000, 1000000),
 
             "description" => [
-                "uz" => fake()->paragraph(5),
+                "uz" => fake()->paragraph(15),
                 "en" => "lorem ipsum dolor sit amet"
             ]
         ];

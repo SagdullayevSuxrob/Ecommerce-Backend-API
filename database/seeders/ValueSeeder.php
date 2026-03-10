@@ -16,6 +16,39 @@ class ValueSeeder extends Seeder
     public function run()
     {
         Value::create([
+            "attribute_id" => 1,
+            "name" => [
+                'uz' => "Qizil",
+                "en" => "Red",
+            ]
+        ]);
+
+        Value::create([
+            "attribute_id" => 1,
+            "name" => [
+                'uz' => "Qora",
+                "en" => "Black",
+            ]
+        ]);
+
+        Value::create([
+            "attribute_id" => 1,
+            "name" => [
+                'uz' => "Jigarrang",
+                "en" => "Brown",
+            ]
+        ]);
+
+
+        Value::create([
+            "attribute_id" => 2,
+            "name" => [
+                "uz" => "LDSP",
+                "en" => "LDSP"
+            ]
+        ]);
+
+        Value::create([
             "attribute_id" => 2,
             "name" => [
                 "uz" => "MDF",
@@ -23,12 +56,27 @@ class ValueSeeder extends Seeder
             ]
         ]);
 
+        Value::create([
+            "attribute_id" => 3,
+            "name" => [
+                "uz" => "Katta",
+                "en" => "Big",
+            ]
+        ]);
 
         Value::create([
-            "attribute_id" => 1,
+            "attribute_id" => 3,
             "name" => [
-                "uz" => "LDSP",
-                "en" => "LDSP"
+                "uz" => "O'rtacha",
+                "en" => "Big",
+            ]
+        ]);
+
+        Value::create([
+            "attribute_id" => 3,
+            "name" => [
+                "uz" => "Kichik",
+                "en" => "Small",
             ]
         ]);
     }
