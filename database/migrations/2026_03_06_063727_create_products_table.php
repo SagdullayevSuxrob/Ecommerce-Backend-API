@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('price');
             $table->json('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

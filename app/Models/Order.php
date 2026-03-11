@@ -16,11 +16,26 @@ class Order extends Model
         'payment_type_id',
         'sum',
         'products',
-        'address'
+        'address',
+    ];
+
+    protected $casts = [
+        "address" => "array",
+        "products" => "array",
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function paymentType()
+    {
+        return $this->belongsTo(PaymentType::class);
+    }
+
+    public function deliveryMethod()
+    {
+        return $this->belongsTo(DeliveryMethod::class);
     }
 }
