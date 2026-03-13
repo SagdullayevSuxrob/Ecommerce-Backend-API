@@ -15,6 +15,7 @@ class Order extends Model
         'delivery_method_id',
         'payment_type_id',
         'sum',
+        'status_id',
         'products',
         'address',
     ];
@@ -38,4 +39,10 @@ class Order extends Model
     {
         return $this->belongsTo(DeliveryMethod::class);
     }
+
+
+    public function status()
+{
+    return $this->belongsTo(Status::class);
+}
 }
