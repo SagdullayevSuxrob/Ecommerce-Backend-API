@@ -8,7 +8,6 @@ use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Product;
-use App\Models\Status;
 use App\Models\Stock;
 use App\Models\UserAddress;
 
@@ -21,7 +20,13 @@ class OrderController extends Controller
 
     public function index()
     {
-        return auth()->user()->orders;
+        if (request()->has('status_id')) {
+            return $this->response(OrderResource::collection(
+                auth()->user()->orders()->where('status_id', request('status_id'))->paginate(9)
+            ));
+        }
+
+        // return $this->response(OrderResource::collection(auth()->user()->orders()->paginate(9)));
     }
 
 
@@ -46,12 +51,10 @@ class OrderController extends Controller
 
                 $sum += $productResource['price'];
                 $products[] = $productResource->resolve();
-
             } else {
                 $requestProduct['We have'] = $product->stocks()->find($requestProduct['stock_id'])->quantity;
                 $notFoundProducts[] = $requestProduct;
             }
-
         }
 
         if ($notFoundProducts == [] && $products != [] && $sum != 0) {
@@ -74,21 +77,18 @@ class OrderController extends Controller
                     $stock->save();
                 }
             }
-            return "success";
+            return $this->success('Order Created', $order);
         } else {
-            return response([
-                "success" => false,
-                'message' => "Some products not found or does not have in inventory !",
-                'not_found_products' => $notFoundProducts
-            ]);
+            return $this->error(
+                "Some products not found or does not have in inventory!",
+                ['not_found_products' => $notFoundProducts]
+            );
         }
-
-
     }
 
     public function show(Order $order)
     {
-        return new OrderResource($order);
+        return $this->response(new OrderResource($order));
     }
 
     public function edit(Order $order)

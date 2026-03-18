@@ -14,7 +14,7 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-    */
+     */
     protected $fillable = [
         'first_name',
         'last_name',
@@ -25,7 +25,7 @@ class User extends Authenticatable
 
     /**
      * The attributes that should be hidden for serialization.
-    */
+     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -33,7 +33,7 @@ class User extends Authenticatable
 
     /**
      * The attributes that should be cast.
-    */
+     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -58,11 +58,18 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
     public function hasFavorite($favorite_id): bool
     {
-
-        // dd($this->favorites()->where('product_id', $favorite_id)->exists());
-
         return $this->favorites()->where('product_id', $favorite_id)->exists();
+    }
+
+    public function settings()
+    {
+        return $this->hasMany(UserSetting::class, 'user_id', 'id');
     }
 }

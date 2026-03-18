@@ -16,21 +16,22 @@ class ProductReviewController extends Controller
 
     public function index(Product $product)
     {
-        return response([
-            'overall' => $product->reviews()->avg('rating'),
+        return $this->response([
+            'overall' => round($product->reviews()->avg('rating'), 1),
             'reviews_count' => $product->reviews()->count(),
-            'reviews' => ReviewResource::collection($product->reviews()->paginate(3))
+            'reviews' => $product->reviews()->with('user')->paginate(3)
         ]);
     }
 
     public function store(Product $product, StoreReviewRequest $request)
     {
-        $product->reviews()->create([
+        $review = $product->reviews()->create([
             'user_id' => auth()->id(),
             'rating' => $request->rating,
             'body' => $request->body,
         ]);
 
-        return response(["success" => true, "message" => "Review Created"]);
+        return $this->success("Review Created", $review);
+        // return response(["success" => true, "message" => "Review Created"]);
     }
 }

@@ -8,7 +8,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
-{
+{    
     public function index()
     {
         return ProductResource::collection(Product::cursorPaginate(25));

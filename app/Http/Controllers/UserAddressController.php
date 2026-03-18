@@ -15,14 +15,14 @@ class UserAddressController extends Controller
 
     public function index()
     {
-        return auth()->user()->addresses;
+        return $this->response(auth()->user()->addresses);
     }
 
  
     public function store(StoreUserAddressRequest $request)
     {
-        return auth()->user()->addresses()->create($request->toArray());
-        
+        $address = auth()->user()->addresses()->create($request->toArray());
+        return $this->success("Shipping address created", $address);
     }
 
  
