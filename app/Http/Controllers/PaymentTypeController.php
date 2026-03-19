@@ -10,7 +10,7 @@ class PaymentTypeController extends Controller
 {
     public function index()
     {
-        return PaymentType::all();
+        return $this->response(PaymentType::all());
     }
 
 
