@@ -10,8 +10,6 @@ class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -19,8 +17,9 @@ class CategorySeeder extends Seeder
             "name" => [
                 'uz' => 'Stol',
                 'en' => 'Table'
-            ]
+            ],
         ]);
+
 
         Category::create([
             "name" => [
@@ -29,12 +28,58 @@ class CategorySeeder extends Seeder
             ]
         ]);
 
-        Category::create([
+        $category = Category::create([
             "name" => [
                 'uz' => 'Kreslo',
                 'en' => 'Armchair'
             ]
         ]);
+
+        $childCategory = $category->childCategories()->create([
+            "name" => [
+                'uz' => 'Ofis uchun',
+                'en' => 'Office'
+            ],
+        ]);
+
+        $childCategory->childCategories()->create([
+            "name" => [
+                'uz' => 'Erkaklar uchun',
+                'en' => 'Men'
+            ],
+        ]);
+
+        $childCategory->childCategories()->create([
+            "name" => [
+                'uz' => 'Ayollar uchun',
+                'en' => 'Women'
+            ],
+        ]);
+
+
+
+        $childCategory = $category->childCategories()->create([
+            "name" => [
+                'uz' => 'O\'yin uchun',
+                'en' => 'Gaming'
+            ],
+        ]);
+
+        $childCategory->childCategories()->create([
+            "name" => [
+                'uz' => 'Bolalar uchun',
+                'en' => 'for Boys'
+            ],
+        ]);
+
+        $childCategory->childCategories()->create([
+            "name" => [
+                'uz' => 'Qizlar uchun',
+                'en' => 'for Girls'
+            ],
+        ]);
+
+
 
         Category::create([
             "name" => [

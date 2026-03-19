@@ -17,7 +17,6 @@ use App\Http\Controllers\StatusOrderController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\UserPaymentCardsController;
 use App\Http\Controllers\UserSettingController;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
@@ -25,6 +24,8 @@ Route::post('logout', [AuthController::class, 'logout']);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('change-password', [AuthController::class, 'changePassword']);
 Route::get('user', [AuthController::class, 'user'])->middleware('auth:sanctum');
+
+Route::get('products/{product}/related', [ProductController::class, 'related']);
 
 Route::apiResources([
     'categories' => CategoryController::class,
@@ -44,14 +45,3 @@ Route::apiResources([
     'payment-card-types' => PaymentCardTypeController::class,
     'user-payment-cards' => UserPaymentCardsController::class,
 ]);
-
-
-Route::get('test', function () {
-    $expD = '12/35';
-
-    $enc = Crypt::encrypt($expD);
-
-    $dec = Crypt::decrypt($enc);
-
-    dd($enc);
-});
