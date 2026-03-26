@@ -16,17 +16,20 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
+        $this->authorizeResource(Order::class, 'order');
     }
 
     public function index()
     {
-/*         if (request()->has('status_id')) {
+        if (request()->has('status_id')) {
             return $this->response(OrderResource::collection(
                 auth()->user()->orders()->where('status_id', request('status_id'))->paginate(9)
             ));
-        } */
+        }
 
-        return $this->response(OrderResource::collection(auth()->user()->orders()->paginate(9)));
+        return $this->response(OrderResource::collection(
+            auth()->user()->orders()->paginate(9)
+        ));
     }
 
 
@@ -103,6 +106,7 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return 1;
     }
 }

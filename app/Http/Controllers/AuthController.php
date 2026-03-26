@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -41,6 +41,9 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        return $this->response(new UserResource($request->user()));
+        return $request->user()->getAllPermissions();
+        return Role::where('name', 'shop-manager')->first()->permissions->pluck('name');
+        return $request->user()->hasPermissionTo('order:delete');
+        return $this->response(new UserResource($request->user()->getPermissionNames()));
     }
 }
