@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Attribute;
-use App\Models\Value;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ValueSeeder extends Seeder
@@ -39,6 +37,7 @@ class ValueSeeder extends Seeder
             ]
         ]);
         
+
         $attribute = Attribute::find(2);
 
         $attribute->values()->create([
