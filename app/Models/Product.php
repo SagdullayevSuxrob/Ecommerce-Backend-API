@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -54,5 +56,22 @@ class Product extends Model
     public function photos()
     {
         return $this->morphMany(Photo::class, 'photoable');
+    }
+
+    public function discount()
+    {
+        return $this->hasOne(Discount::class);
+    }
+
+    public function getDiscount()
+    {
+        if ($this->discount) {
+            if ($this->discount->from == null && $this->discount->to == null) {
+                return $this->discount;
+            }
+            if (Carbon::now()->between(Carbon::parse($this->discount->from), Carbon::parse($this->discount->to))) {
+                return $this->discount;
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\DeliveryMethodController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentCardTypeController;
@@ -34,6 +35,7 @@ Route::apiResources([
     'products' => ProductController::class,
     'settings' => SettingController::class,
     'favorites' => FavoriteController::class,
+    'discounts' => DiscountController::class,
     'categories' => CategoryController::class,
     'users.photos' => UserPhotoController::class,
     'user-settings' => UserSettingController::class,
