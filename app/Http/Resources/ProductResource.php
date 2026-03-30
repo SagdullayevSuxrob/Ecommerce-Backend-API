@@ -18,6 +18,7 @@ class ProductResource extends JsonResource
             'inventory' => StockResource::collection($this->stocks),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'photos' => PhotoResource::collection($this->photos),
         ];
     }
 }

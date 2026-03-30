@@ -50,4 +50,9 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'photoable');
+    }
 }

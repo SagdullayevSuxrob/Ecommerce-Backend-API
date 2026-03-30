@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -23,7 +23,7 @@ class AuthController extends Controller
         }
 
         return $this->success(
-            '',
+            'User logged in successfully',
             ['token' => $user->createToken($request->email)->plainTextToken]
         );
     }
@@ -32,18 +32,42 @@ class AuthController extends Controller
     public function logout() {}
 
 
-    public function register() {}
 
-    public function changePassword()
+    public function register(RegisterRequest $request)
     {
-        
+        $data = $request->validated();
+        $data['password'] = Hash::make($request->password);
+        $user = User::create($data);
+        $user->assignRole('customer');
+
+        // photo maydoni users jadvaliga kiritilmasligi uchun olib tashlang
+        if (isset($data['photo'])) {
+            unset($data['photo']);
+        }
+
+
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('users/' . $user->id, 'public');
+            $user->photos()->create([
+                'full_name' => $request->file('photo')->getClientOriginalName(),
+                'path' => $path,
+            ]);
+        }
+
+        return $this->success(
+            'User registered successfully',
+            ['token' => $user->createToken($request->email)->plainTextToken]
+        );
     }
+
+
+
+    public function changePassword() {}
+
+
 
     public function user(Request $request)
     {
-        return $request->user()->getAllPermissions();
-        return Role::where('name', 'shop-manager')->first()->permissions->pluck('name');
-        return $request->user()->hasPermissionTo('order:delete');
-        return $this->response(new UserResource($request->user()->getPermissionNames()));
+        return $this->response(new UserResource($request->user()));
     }
 }

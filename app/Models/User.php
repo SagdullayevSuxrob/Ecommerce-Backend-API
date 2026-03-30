@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'photo',
     ];
 
     /**
@@ -72,5 +73,10 @@ class User extends Authenticatable
     public function paymentCards()
     {
         return $this->hasMany(UserPaymentCards::class);
+    }
+
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'photoable');
     }
 }
