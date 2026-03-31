@@ -24,11 +24,27 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPaymentCardsController;
 use App\Http\Controllers\UserPhotoController;
 use App\Http\Controllers\UserSettingController;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 Route::get('products/{product}/related', [ProductController::class, 'related']);
 Route::post('roles/assign', [RoleController::class, 'assign']);
 Route::post('permissions/assign', [PermissionController::class, 'assign']);
+
+
+// =====FOR TESTING NOTIFICATION======= \\
+Route::get('test', function () {
+    $order = Order::find(3);
+    $notification = ucfirst('confirmed');
+    $class = "\App\Notifications\Order\\$notification";
+
+
+    $order->update(['status_id' => 5]);
+
+    dd($order->status_id);
+});
+// ======= END TESTING NOTIFICATION =======\\
+
 
 Route::apiResources([
     'users' => UserController::class,
