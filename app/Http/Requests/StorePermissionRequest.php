@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRoleRequest extends FormRequest
+class StorePermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class StoreRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('role:create');
+        return auth()->user()->can('permission:create');
     }
 
     /**
@@ -24,7 +25,7 @@ class StoreRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => "required",
         ];
     }
 }
