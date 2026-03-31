@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\LazyCollection;
 
 class StatsController extends Controller
@@ -59,10 +58,6 @@ class StatsController extends Controller
 
     public function deliveryMethodsRatio(Request $request)
     {
-        /* if (Cache::has('deliveryMethodsRatio')) {
-            return Cache::get('deliveryMethodsRatio');
-        } */
-
         $from = Carbon::now()->subMonth();
         $to = Carbon::now();
 
@@ -90,9 +85,6 @@ class StatsController extends Controller
                 "amount" => $deliveryMethodOrders
             ];
         }
-
-        // Cache::put('deliveryMethodsRatio', $response, Carbon::now()->addDay());
-
         return $this->response($response);
     }
 
@@ -122,7 +114,6 @@ class StatsController extends Controller
                 'date' => $day->format('Y-m-d'),
                 'orders_count' => $count,
             ];
-        
         });
 
         return $this->response($response);

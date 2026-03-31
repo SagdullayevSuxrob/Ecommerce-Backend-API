@@ -18,9 +18,8 @@ class FavoriteController extends Controller
     }
 
 
-    /**
-     * TODO refactor responses, make standart format
-    **/
+    //TODO refactor responses, make standart format
+
     public function store(Request $request)
     {
         auth()->user()->favorites()->attach($request->product_id);
@@ -37,7 +36,6 @@ class FavoriteController extends Controller
 
             return response()->json(["Deleted successfully"]);
         }
-
         return response()->json(["Favorite doesn't exist in this user's profile"]);
     }
 }

@@ -29,7 +29,12 @@ class AuthController extends Controller
     }
 
 
-    public function logout() {}
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+
+        return $this->success('User logged out successfully');
+    }
 
 
 
@@ -62,7 +67,25 @@ class AuthController extends Controller
 
 
 
-    public function changePassword() {}
+    public function changePassword()
+    {
+        $user = auth()->user();
+        $data = request()->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|confirmed|min:8',
+        ]);
+
+        if (!Hash::check($data['current_password'], $user->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => ['The provided password is incorrect.'],
+            ]);
+        }
+
+        $user->password = Hash::make($data['new_password']);
+        $user->save();
+
+        return $this->success('Password changed successfully');
+    }
 
 
 

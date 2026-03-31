@@ -65,13 +65,4 @@ class RoleController extends Controller
         $user->assignRole($role->name);
         return $this->success('Role assigned to user successfully.');
     }
-
-/*     public function removeRoleFromUser(AssignRoleToUserRequest $request)
-    {
-        $user = User::findOrFail($request->user_id);
-        $role = Role::findOrFail($request->role_id);
-
-        $user->removeRole($role->name);
-        return $this->success('Role removed from user successfully.');
-    } */
 }

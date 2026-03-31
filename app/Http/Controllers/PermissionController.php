@@ -25,7 +25,7 @@ class PermissionController extends Controller
         if (Permission::where('name', $request->name)->exists()) {
             return $this->error('Permission already exists.', 422);
         }
-        
+
         $permission = Permission::query()->create(['name' => $request->name, 'guard_name' => 'web']);
         return $this->success('Permission created successfully.', $permission);
     }

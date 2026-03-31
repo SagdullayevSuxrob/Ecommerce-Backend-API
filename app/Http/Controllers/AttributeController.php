@@ -10,8 +10,6 @@ class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -20,8 +18,6 @@ class AttributeController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -30,9 +26,6 @@ class AttributeController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreAttributeRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(StoreAttributeRequest $request)
     {
@@ -41,9 +34,6 @@ class AttributeController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
      */
     public function show(Attribute $attribute)
     {
@@ -52,9 +42,6 @@ class AttributeController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
      */
     public function edit(Attribute $attribute)
     {
@@ -63,10 +50,6 @@ class AttributeController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateAttributeRequest  $request
-     * @param  \App\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
      */
     public function update(UpdateAttributeRequest $request, Attribute $attribute)
     {
@@ -75,9 +58,6 @@ class AttributeController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Attribute $attribute)
     {

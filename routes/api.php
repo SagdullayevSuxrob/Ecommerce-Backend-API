@@ -27,9 +27,9 @@ use App\Http\Controllers\UserSettingController;
 use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
-Route::get('products/{product}/related', [ProductController::class, 'related']);
 Route::post('roles/assign', [RoleController::class, 'assign']);
 Route::post('permissions/assign', [PermissionController::class, 'assign']);
+Route::get('products/{product}/related', [ProductController::class, 'related']);
 
 
 // =====FOR TESTING NOTIFICATION======= \\
@@ -39,7 +39,7 @@ Route::get('test', function () {
     $class = "\App\Notifications\Order\\$notification";
 
 
-    $order->update(['status_id' => 5]);
+    $order->update(['status_id' => 2]);
 
     dd($order->status_id);
 });

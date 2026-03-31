@@ -14,12 +14,6 @@ class PaymentTypeController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
-
     public function store(StorePaymentTypeRequest $request)
     {
         //
@@ -27,12 +21,6 @@ class PaymentTypeController extends Controller
 
 
     public function show(PaymentType $paymentType)
-    {
-        //
-    }
-
-
-    public function edit(PaymentType $paymentType)
     {
         //
     }

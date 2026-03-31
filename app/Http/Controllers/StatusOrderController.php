@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChangeOrderStatusRequest;
 use App\Models\Order;
 use App\Models\Status;
-use Illuminate\Http\Request;
 
 class StatusOrderController extends Controller
 {

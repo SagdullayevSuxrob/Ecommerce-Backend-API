@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReviewRequest;
-use App\Http\Resources\ReviewResource;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductReviewController extends Controller
 {
@@ -32,6 +30,5 @@ class ProductReviewController extends Controller
         ]);
 
         return $this->success("Review Created", $review);
-        // return response(["success" => true, "message" => "Review Created"]);
     }
 }

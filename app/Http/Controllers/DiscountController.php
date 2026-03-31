@@ -17,7 +17,7 @@ class DiscountController extends Controller
     public function store(StoreDiscountRequest $request)
     {
         if (Discount::where('product_id', $request->product_id)->exists()) {
-            return $this->error('A discount for this product already exists', 422); 
+            return $this->error('A discount for this product already exists', 422);
         }
 
         $discount = Discount::create($request->validated());
@@ -35,7 +35,7 @@ class DiscountController extends Controller
     public function update(UpdateDiscountRequest $request, Discount $discount)
     {
         $discount->update($request->validated());
-        
+
         return $this->success('Discount updated successfully', $discount);
     }
 

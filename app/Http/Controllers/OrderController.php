@@ -42,7 +42,6 @@ class OrderController extends Controller
         $address = UserAddress::find($request->address_id);
         $deliveryMethod = DeliveryMethod::findOrFail($request->delivery_method_id);
 
-
         foreach ($request['products'] as $requestProduct) {
             $product = Product::with('stocks')->findOrFail($requestProduct['product_id']);
             $product->quantity = $requestProduct['quantity'];
@@ -53,7 +52,7 @@ class OrderController extends Controller
             ) {
                 $productWithStock = $product->withStock($requestProduct['stock_id']);
                 $productResource = (new ProductResource($productWithStock))->resolve();
-                
+
                 $sum += $productResource['discounted_price'] ?? $productResource['price'];
                 $sum += $productWithStock->stocks[0]->added_price;
                 $products[] = $productResource;
@@ -66,7 +65,6 @@ class OrderController extends Controller
         if ($notFoundProducts == [] && $products != [] && $sum != 0) {
 
             $sum += $deliveryMethod->sum;
-            // TODO add status of order
 
             $order = auth()->user()->orders()->create([
                 "comment" => $request->comment,
@@ -98,12 +96,7 @@ class OrderController extends Controller
     {
         return $this->response(new OrderResource($order));
     }
-
-    public function edit(Order $order)
-    {
-        //
-    }
-
+    
     public function update(UpdateOrderRequest $request, Order $order)
     {
         //

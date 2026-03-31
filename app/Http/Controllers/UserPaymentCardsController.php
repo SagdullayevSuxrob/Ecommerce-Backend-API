@@ -13,7 +13,7 @@ class UserPaymentCardsController extends Controller
     {
         $this->middleware("auth:sanctum");
     }
- 
+
     public function index()
     {
         return UserPaymentCardResource::collection(auth()->user()->paymentCards);
@@ -23,7 +23,7 @@ class UserPaymentCardsController extends Controller
     {
         $card = auth()->user()->paymentCards()->create([
             'name' => encrypt($request->name),
-            'number' => encrypt( $request->number),
+            'number' => encrypt($request->number),
             "exp_date" => encrypt($request->exp_date),
             "holder_name" => encrypt($request->holder_name),
             "last_four_numbers" => encrypt(substr($request->number, -4)),
